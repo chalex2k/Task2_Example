@@ -12,29 +12,32 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Введите сторону а:");
-        int a = scanner.nextInt();
-
-        System.out.println("Введите сторону b:");
-        int b = scanner.nextInt();
-
-        System.out.println("Введите сторону c:");
-        int c = scanner.nextInt();
+        int a = inputSide(scanner, "a");
+        int b = inputSide(scanner, "b");
+        int c = inputSide(scanner, "c");
 
         TriangleKind kind = getKindOfTriangle(a, b, c);
 
-        if (kind == TriangleKind.EQUILATERAL){
-            System.out.println("Равносторонний треугольник!");
-        } else if (kind == TriangleKind.ISOSCELES) {
-            System.out.println("Равнобедренный треугольник. 2 стороны равны!");
-        } else if (kind == TriangleKind.USUAL) {
-            System.out.println("Разносторонний треугольник");
-        } else {
-            System.out.println("Неизвестный науке треугольник");
+        String message;
+        switch (kind) {
+            case EQUILATERAL:
+                message = "Равносторонний треугольник!";
+                break;
+            case ISOSCELES:
+                message = "Равнобедренный треугольник. 2 стороны равны!";
+                break;
+            case USUAL:
+                message = "Разносторонний треугольник";
+                break;
+            default:
+                message = "Неизвестный науке треугольник";
+                break;
         }
-    }
 
-    // Метод определяет и возвращает вид треугольника
+        System.out.println(message);
+    }
+    
+    // Метод определяет и возвращает вид треугольника 
     static TriangleKind getKindOfTriangle(int a, int b, int c) {
         if (a == b && b == c) {
             return TriangleKind.EQUILATERAL;
@@ -43,5 +46,11 @@ public class Main {
             return TriangleKind.ISOSCELES;
         }
         return TriangleKind.USUAL;
+    }
+
+    // Метод запрашивает у пользователя стророну side треугольника
+    static int inputSide(Scanner scanner, String side) {
+        System.out.printf("Введите сторону %s:%n", side);
+        return scanner.nextInt();
     }
 }
